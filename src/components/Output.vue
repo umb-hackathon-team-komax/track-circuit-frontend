@@ -1,9 +1,9 @@
 <template>
-    <div class="rounded border md:shadow">
-  <div class="px-4 py-4">
-        <vue3-chart-js v-bind="{ ...barChart }" />
+  <div class="rounded border md:shadow">
+    <div class="px-4 py-4">
+      <vue3-chart-js v-bind="{ ...getChartOptions }" />
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -13,7 +13,39 @@ export default {
   components: {
     Vue3ChartJs,
   },
-    setup() {
+  data() {
+    return {
+      output: [
+        {
+          time: new Date(),
+          drilled: 12,
+          notdrilled: 29,
+        },
+        {
+          time: new Date().setHours(-24),
+          drilled: 6,
+          notdrilled: 13,
+        },
+        {
+          time: new Date().setHours(-48),
+          drilled: 35,
+          notdrilled: 21,
+        },
+        {
+          time: new Date().setHours(-72),
+          drilled: 23,
+          notdrilled: 83,
+        },
+        {
+          time: new Date().setHours(-96),
+          drilled: 26,
+          notdrilled: 34,
+        },
+      ],
+    };
+  },
+  beforeMount() {
+      
     const barChart = {
       type: "bar",
       options: {
@@ -22,46 +54,92 @@ export default {
         responsive: true,
         plugins: {
           legend: {
-            position: "top",
+            position: "bottom",
           },
         },
         scales: {
+          x: {
+            stacked: true,
+          },
           y: {
-            min: -100,
-            max: 100,
+            stacked: true,
+            min: 0,
             ticks: {
               callback: function (value) {
-                return `${value}%`;
+                return `${value}`;
               },
             },
           },
         },
       },
       data: {
-        labels: ["VueJs", "EmberJs", "ReactJs", "AngularJs"],
+        labels: this.output.map((d) => d.toString()),
         datasets: [
           {
-            label: "My First Dataset",
-            backgroundColor: ["#1abc9c", "#f1c40f", "#2980b9", "#34495e"],
-            data: [40, 20, 50, 10],
+            label: "drilled",
+            backgroundColor: ["#396999"],
+            data: this.output.map((d) => d.drilled),
           },
           {
-            label: "My Second Dataset",
-            backgroundColor: ["#2ecc71", "#e67e22", "#9b59b6", "#bdc3c7"],
-            data: [-40, -20, -10, -10],
+            label: "not drilled",
+            backgroundColor: ["#F04D55"],
+            data: this.output.map((d) => d.notdrilled),
           },
         ],
       },
     };
-
     return {
       barChart,
     };
   },
-
-}
+  computed: {
+    getChartOptions() {
+      return {
+        type: "bar",
+      options: {
+        min: 0,
+        max: 100,
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "bottom",
+          },
+        },
+        scales: {
+          x: {
+            stacked: true,
+          },
+          y: {
+            stacked: true,
+            min: 0,
+            ticks: {
+              callback: function (value) {
+                return `${value}`;
+              },
+            },
+          },
+        },
+      },
+      data: {
+        labels: this.output.map((d) => d.toString()),
+        datasets: [
+          {
+            label: "drilled",
+            backgroundColor: ["#396999"],
+            data: this.output.map((d) => d.drilled),
+          },
+          {
+            label: "not drilled",
+            backgroundColor: ["#F04D55"],
+            data: this.output.map((d) => d.notdrilled),
+          },
+        ],
+      },
+    }
+  },
+  }
+};
 </script>
 
 <style>
-
 </style>
