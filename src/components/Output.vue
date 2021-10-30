@@ -17,27 +17,27 @@ export default {
     return {
       output: [
         {
-          time: new Date(),
+          time: "08:30",
           drilled: 12,
           notdrilled: 29,
         },
         {
-          time: new Date().setHours(-24),
+          time: "09:00",
           drilled: 6,
           notdrilled: 13,
         },
         {
-          time: new Date().setHours(-48),
+          time: "09:30",
           drilled: 35,
           notdrilled: 21,
         },
         {
-          time: new Date().setHours(-72),
+          time: "10:00",
           drilled: 23,
           notdrilled: 83,
         },
         {
-          time: new Date().setHours(-96),
+          time: "10:30",
           drilled: 26,
           notdrilled: 34,
         },
@@ -73,7 +73,7 @@ export default {
         },
       },
       data: {
-        labels: this.output.map((d) => d.toString()),
+        labels: this.output.map((d)=> d),
         datasets: [
           {
             label: "drilled",
@@ -121,7 +121,7 @@ export default {
         },
       },
       data: {
-        labels: this.output.map((d) => d.toString()),
+        labels: this.output.map((d) => d.time),
         datasets: [
           {
             label: "drilled",

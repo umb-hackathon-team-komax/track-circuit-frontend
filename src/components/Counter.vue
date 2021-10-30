@@ -3,7 +3,7 @@
     <div class="px-4 py-4 text-center justify-items-center m-8">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-40 w-40 mx-auto text-primary"
+        class="h-28 w-28 mx-auto text-primary"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -28,7 +28,7 @@
 export default {
   data() {
     return {
-      count: 0,
+      count: 234,
     };
   },
 };
